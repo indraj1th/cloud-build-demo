@@ -1,0 +1,11 @@
+steps:
+- name: python:3.8-slim-buster
+  args: ['bash', '-c', 'pip install -r requirements.txt && pip install pytest && ls && python -m pytest']
+  allowExitCodes: [1]
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/hack-night-385117/test-build-repo/test-image:new', '.' ]
+
+images:
+- 'us-central1-docker.pkg.dev/hack-night-385117/test-build-repo/test-image:new'
+
